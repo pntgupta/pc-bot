@@ -1,0 +1,8 @@
+30-Jun-2019 03:30:57 [[32minfo[39m]: 	[app.js] info
+30-Jun-2019 03:30:57 [[32minfo[39m]: 	[app.js] Process 22448 listening on: 127.0.0.1:4001, {"env":"dev"}
+30-Jun-2019 03:32:01 [[32minfo[39m]: 	[app.js] debug
+30-Jun-2019 03:32:01 [[32minfo[39m]: 	[app.js] Process 22543 listening on: 127.0.0.1:4001, {"env":"dev"}
+30-Jun-2019 03:32:37 [[32minfo[39m]: 	[app.js] debug
+30-Jun-2019 03:32:37 [[32minfo[39m]: 	[app.js] Process 22567 listening on: 127.0.0.1:4001, {"env":"dev"}
+30-Jun-2019 03:32:55 [[32minfo[39m]: 	[app.js] info
+30-Jun-2019 03:32:55 [[32minfo[39m]: 	[app.js] Process 22681 listening on: 127.0.0.1:4001, {"env":"dev"}

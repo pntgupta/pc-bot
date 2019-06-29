@@ -1,0 +1,71 @@
+{
+  "name": "node-seed",
+  "description": "Node seed app",
+  "version": "1.0.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Punit Gupta",
+    "email": "punit.gupta14@yahoo.com"
+  },
+  "main": "app.js",
+  "scripts": {
+    "c": "node git-hooks/commit-msg",
+    "git:commit-msg": "node git-hooks/commit-msg -git < /dev/tty",
+    "lint": "eslint ./ -c .eslintrc.js --ext js --fix",
+    "monit": "pm2 monit",
+    "start": ". ./envConfig.sh && pm2 start ecosystem.config.js",
+    "restart": ". ./envConfig.sh && pm2 restart ecosystem.config.js --update-env",
+    "reload": "pm2 reload ecosystem.config.js",
+    "stop": "pm2 stop $APP_NAME",
+    "delete": "pm2 delete $APP_NAME",
+    "logs": "pm2 logs $APP_NAME",
+    "flushlogs": "pm2 flush $APP_NAME",
+    "status": "pm2 status",
+    "plus": "pm2 plus",
+    "debug": "yarn env && node --inspect:127.0.0.1:9228 app.js"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "yarn git:commit-msg",
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn lint"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "joi": "^14.3.1",
+    "moment": "^2.24.0",
+    "pm2": "^3.5.1",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.18.2"
+  },
+  "engines": {
+    "node": ">=11.10.0",
+    "yarn": ">= 1.7.0",
+    "npm": ">= 5.5.0"
+  }
+}
