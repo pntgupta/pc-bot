@@ -41,7 +41,7 @@ class Logger {
 
   _logMsg(level, context, message, meta) {
     this.logger[level](
-      `[${context}] ${message}${meta ? ', ' + JSON.stringify(meta) : ''}`
+      `[${context}] ${message}${meta ? `, ${JSON.stringify(meta)}` : ''}`
     );
   }
 
@@ -56,7 +56,12 @@ class Logger {
             winston.format.colorize(),
             winston.format.timestamp(),
             winston.format.align(),
-            winston.format.printf(info => `${moment(info.timestamp).format('DD-MMM-YYYY hh:mm:ss')} [${info.level}]: ${info.message}`),
+            winston.format.printf(
+              info =>
+                `${moment(info.timestamp).format('DD-MMM-YYYY hh:mm:ss')} [${
+                  info.level
+                }]: ${info.message}`
+            )
           )
         })
       ]

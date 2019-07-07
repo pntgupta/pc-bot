@@ -1,6 +1,6 @@
 class OtherControllers {
   ping(req, res, next) {
-    res.locals.response = { message: 'pong' };
+    res.locals.response = { data: 'pong' };
     next();
   }
 }

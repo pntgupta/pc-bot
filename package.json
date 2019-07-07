@@ -17,17 +17,17 @@
     "c": "node git-hooks/commit-msg",
     "git:commit-msg": "node git-hooks/commit-msg -git < /dev/tty",
     "lint": "eslint ./ -c .eslintrc.js --ext js --fix",
-    "monit": "pm2 monit",
     "start": ". ./envConfig.sh && pm2 start ecosystem.config.js",
     "restart": ". ./envConfig.sh && pm2 restart ecosystem.config.js --update-env",
-    "reload": "pm2 reload ecosystem.config.js",
-    "stop": "pm2 stop $APP_NAME",
-    "delete": "pm2 delete $APP_NAME",
-    "logs": "pm2 logs $APP_NAME",
-    "flushlogs": "pm2 flush $APP_NAME",
+    "reload": ". ./envConfig.sh && pm2 reload ecosystem.config.js",
+    "stop": ". ./envConfig.sh && pm2 stop $APP_NAME",
+    "delete": ". ./envConfig.sh && pm2 delete $APP_NAME",
+    "logs": ". ./envConfig.sh && pm2 logs $APP_NAME",
+    "flushlogs": ". ./envConfig.sh && pm2 flush $APP_NAME",
+    "monit": "pm2 monit",
     "status": "pm2 status",
     "plus": "pm2 plus",
-    "debug": "yarn env && node --inspect:127.0.0.1:9228 app.js"
+    "debug": ". ./envConfig.sh && nodemon --inspect=127.0.0.1:9228 app.js"
   },
   "husky": {
     "hooks": {
@@ -53,6 +53,8 @@
     "joi": "^14.3.1",
     "moment": "^2.24.0",
     "pm2": "^3.5.1",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
     "winston": "^3.2.1"
   },
   "devDependencies": {
@@ -61,6 +63,9 @@
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-prettier": "^3.1.0",
+    "husky": "^2.7.0",
+    "lint-staged": "^8.2.1",
+    "nodemon": "^1.19.1",
     "prettier": "^1.18.2"
   },
   "engines": {

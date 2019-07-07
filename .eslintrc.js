@@ -19,6 +19,7 @@ module.exports = {
     'no-underscore-dangle': 0,
     'curly': ['error', 'all'],
     // 'no-prototype-builtins': 0, // We do use foo.hasOwnProperty('bar') and in our scenarios object prototype is always available
-    'no-restricted-syntax': ['error', 'ForInStatement', 'LabeledStatement', 'WithStatement']
+    'no-restricted-syntax': ['error', 'ForInStatement', 'LabeledStatement', 'WithStatement'],
+    'no-unused-vars': ["error", { "argsIgnorePattern": "^_" }]
   }
 };

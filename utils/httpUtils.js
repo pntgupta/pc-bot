@@ -3,11 +3,10 @@ const globalConstants = require('../constants/globalConstants');
 
 class HTTPUtils {
   generateResponseJson(args) {
-    const { success = null, failure = null, error = null } = args;
+    const { success = null, error = null } = args;
 
     return {
       success,
-      failure,
       error: this.getErrorMessaage(error)
     };
   }

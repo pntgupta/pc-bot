@@ -10,7 +10,8 @@ module.exports = {
       autorestart: true,
       watch: false,
       max_memory_restart: '200M',
-      output: envConfig.logger.level !== 'error' ? './logs/pm2/out.log' : '/dev/null',
+      output:
+        envConfig.logger.level !== 'error' ? './logs/pm2/out.log' : '/dev/null',
       error: './logs/pm2/error.log',
       log: '/dev/null'
     }

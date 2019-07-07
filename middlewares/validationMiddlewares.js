@@ -3,6 +3,8 @@ const Joi = require('joi');
 const logger = require('../libraries/logger');
 const ApplicationError = require('../errors/ApplicationError');
 const globalConstants = require('../constants/globalConstants');
+const errorMessages = require('../constants/errorMessages');
+const envConfig = require('../config/environment');
 
 const scriptName = path.basename(__filename);
 
@@ -33,6 +35,69 @@ class ValidationMiddlewares {
         );
       }
     };
+  }
+
+  validateToken(req, res, next) {
+    logger.debug(scriptName, 'validateToken');
+
+    if (req.body.token === envConfig.slack.appToken) {
+      next();
+    } else {
+      next(
+        new ApplicationError({
+          message: errorMessages.SLACK.INVALID_APP_TOKEN,
+          status: globalConstants.HTTP_STATUS_CODES.VALIDATION_ERROR
+        })
+      );
+    }
+  }
+
+  /**
+   * End the request if the event is not indended for this bot.
+   * @param {*} req -
+   * @param {*} res -
+   * @param {*} next -
+   * @returns {void}
+   */
+  validateAppId(req, res, next) {
+    logger.debug(scriptName, 'validateAppId');
+
+    if (
+      req.body.api_app_id &&
+      envConfig.slack.appId &&
+      req.body.api_app_id !== envConfig.slack.appId
+    ) {
+      logger.info(
+        scriptName,
+        'validateAppId',
+        'Message not meant for this bot, not processing.'
+      );
+      res.send();
+    } else {
+      next();
+    }
+  }
+
+  /**
+   * This is to prevent the reply for any message posted by this bot.
+   * @param {*} req -
+   * @param {*} res -
+   * @param {*} next -
+   * @returns {void}
+   */
+  validateMessage(req, res, next) {
+    logger.debug(scriptName, 'validateMessage');
+
+    if (
+      req.body.event &&
+      (req.body.event.bot_id === envConfig.slack.id ||
+        req.body.event.user === envConfig.slack.userId)
+    ) {
+      logger.info(scriptName, 'validateMessage', 'Bot message, not processing');
+      res.send();
+    } else {
+      next();
+    }
   }
 
   _validator(data, schema, options = {}) {
